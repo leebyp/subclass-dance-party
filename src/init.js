@@ -1,5 +1,7 @@
 $(document).ready(function(){
-  window.dancers = [];
+  window.pikachu = [];
+  window.pokeballs = [];
+  window.enemies = [];
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -25,9 +27,51 @@ $(document).ready(function(){
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 1000
+      Math.random() * 1
     );
     $('body').append(dancer.$node);
   });
+
+  $(".addInvaderButton").on("click", function(event){
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    var dancerMakerFunction = window[dancerMakerFunctionName];
+
+    var dancer = new dancerMakerFunction(
+      ($("body").height() - 300) * Math.random() + 100,
+      ($("body").width() - 100) * Math.random() + 100,
+      500
+    );
+    $('body').append(dancer.$node);
+    window.enemies.push(dancer.$node);
+  });
+
+  $(".addPikachuButton").on("click", function(event){
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    var dancerMakerFunction = window[dancerMakerFunctionName];
+
+    var dancer = new dancerMakerFunction(
+      $("body").height() - 200,
+      $("body").width() * Math.random(),
+      100
+    );
+    $('body').append(dancer.$node);
+    window.pikachu.push(dancer);
+  });
+
+  $(".addPokeballButton").on("click", function(event){
+    var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    var dancerMakerFunction = window[dancerMakerFunctionName];
+
+    var dancer = new dancerMakerFunction(
+      $("body").height() - 200,
+      window.pikachu[0].left, //should be equal to pikachus current .left
+      Math.random() * 1
+    );
+    $('body').append(dancer.$node);
+    window.pokeballs.push(dancer.$node);
+  });
+
+
+
 });
 
