@@ -7,10 +7,9 @@ var Pikachu = function(top, left, timeBetweenSteps){
 };
 
 Pikachu.prototype = Object.create(Dancer.prototype);
-Pikachu.prototype.constructor = Dancer;
-Pikachu.prototype.oldStep = Dancer.prototype.step;
+Pikachu.prototype.constructor = Pikachu;
 Pikachu.prototype.step = function(){
-  this.oldStep();
+  Dancer.prototype.step.call(this);
   //move the dot in the current direction
   //if left > window width OR less than 0, flip the direction
   if (this.left > window.innerWidth - 100 || this.left < 100){

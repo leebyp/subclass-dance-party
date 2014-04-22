@@ -60,7 +60,7 @@ $(document).ready(function(){
     window.pikachu.push(dancer);
     this.remove();
 
-    for (var i=0; i<50; i++){
+    for (var i=0; i<100; i++){
       $('.addInvaderButton').trigger('click');
     }
 

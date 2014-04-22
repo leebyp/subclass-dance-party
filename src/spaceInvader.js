@@ -7,10 +7,9 @@ var SpaceInvader = function(top, left, timeBetweenSteps){
 };
 
 SpaceInvader.prototype = Object.create(Dancer.prototype);
-SpaceInvader.prototype.constructor = Dancer;
-SpaceInvader.prototype.oldStep = Dancer.prototype.step;
+SpaceInvader.prototype.constructor = SpaceInvader;
 SpaceInvader.prototype.step = function(){
-  this.oldStep();
+  Dancer.prototype.step.call(this);
   //move the dot in the current direction
   //if left > window width OR less than 0, flip the direction and move down
   if (this.left > window.innerWidth - 100 || this.left < 100){
