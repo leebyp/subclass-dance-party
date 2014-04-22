@@ -52,7 +52,7 @@ $(document).ready(function(){
     var DancerMakerFunction = window[dancerMakerFunctionName];
 
     var dancer = new DancerMakerFunction(
-      $("body").height() - 200,
+      $("body").height() - 150,
       ($("body").width() - 200) * Math.random() + 100,
       100
     );
