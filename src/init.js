@@ -20,11 +20,11 @@ $(document).ready(function(){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
 
     // get the maker function for the kind of dancer we're supposed to make
-    var dancerMakerFunction = window[dancerMakerFunctionName];
+    var DancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
 
-    var dancer = new dancerMakerFunction(
+    var dancer = new DancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
       Math.random() * 1
@@ -34,43 +34,44 @@ $(document).ready(function(){
 
   $(".addInvaderButton").on("click", function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-    var dancerMakerFunction = window[dancerMakerFunctionName];
+    var DancerMakerFunction = window[dancerMakerFunctionName];
 
-    var dancer = new dancerMakerFunction(
-      ($("body").height() - 300) * Math.random() + 100,
-      ($("body").width() - 100) * Math.random() + 100,
+    var dancer = new DancerMakerFunction(
+      ($("body").height() - 400) * Math.random() + 100,
+      ($("body").width() - 200) * Math.random() + 100,
       500
     );
     $('body').append(dancer.$node);
-    window.enemies.push(dancer.$node);
+    window.enemies.push(dancer);
   });
 
   $(".addPikachuButton").on("click", function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-    var dancerMakerFunction = window[dancerMakerFunctionName];
+    var DancerMakerFunction = window[dancerMakerFunctionName];
 
-    var dancer = new dancerMakerFunction(
+    var dancer = new DancerMakerFunction(
       $("body").height() - 200,
-      $("body").width() * Math.random(),
+      ($("body").width() - 200) * Math.random() + 100,
       100
     );
     $('body').append(dancer.$node);
     window.pikachu.push(dancer);
+    this.remove();
   });
 
-  $(".addPokeballButton").on("click", function(event){
+  $(".addPokeballButton").click(function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-    var dancerMakerFunction = window[dancerMakerFunctionName];
+    console.log(dancerMakerFunctionName);
+    var DancerMakerFunction = window[dancerMakerFunctionName];
 
-    var dancer = new dancerMakerFunction(
+    var dancer = new DancerMakerFunction(
       $("body").height() - 200,
       window.pikachu[0].left, //should be equal to pikachus current .left
       Math.random() * 1
     );
     $('body').append(dancer.$node);
-    window.pokeballs.push(dancer.$node);
+    window.pokeballs.push(dancer);
   });
-
 
 
 });
