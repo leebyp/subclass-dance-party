@@ -73,6 +73,10 @@ $(document).ready(function(){
     window.pokeballs.push(dancer);
   });
 
+  $("body").on("mouseover", ".pikachu",function(){
+    $(".addPokeballButton").trigger("click");
+  })
+
 
 });
 
