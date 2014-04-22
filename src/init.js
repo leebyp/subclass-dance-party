@@ -32,6 +32,7 @@ $(document).ready(function(){
     $('body').append(dancer.$node);
   });
 
+  //add additional enemies
   $(".addInvaderButton").on("click", function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
     var DancerMakerFunction = window[dancerMakerFunctionName];
@@ -45,6 +46,7 @@ $(document).ready(function(){
     window.enemies.push(dancer);
   });
 
+  //start button, adding one pikachu and 50 enemies at random locations
   $(".addPikachuButton").on("click", function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
     var DancerMakerFunction = window[dancerMakerFunctionName];
@@ -57,8 +59,14 @@ $(document).ready(function(){
     $('body').append(dancer.$node);
     window.pikachu.push(dancer);
     this.remove();
+
+    for (var i=0; i<50; i++){
+      $('.addInvaderButton').trigger('click');
+    }
+
   });
 
+  //fire pokeball at enemies, by clicking button/mouseover/spacebar
   $(".addPokeballButton").click(function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
     console.log(dancerMakerFunctionName);
@@ -66,16 +74,45 @@ $(document).ready(function(){
 
     var dancer = new DancerMakerFunction(
       $("body").height() - 200,
-      window.pikachu[0].left, //should be equal to pikachus current .left
-      Math.random() * 1
+      window.pikachu[0].left + (96 / 2) - (35 / 2), //should be equal to pikachus current .left
+      2
     );
     $('body').append(dancer.$node);
     window.pokeballs.push(dancer);
   });
 
-  $("body").on("mouseover", ".pikachu",function(){
+  $("body").on("mouseover", ".pikachu", function(){
     $(".addPokeballButton").trigger("click");
-  })
+  });
+
+  $(window).on("keydown", function(event){
+    if (event.keyCode === 32) {
+      $(".addPokeballButton").trigger("click");
+    }
+  });
+
+  //line up enemies at top of screen
+  $(".lineup").click(function(event){
+    //set constant gap based on window width so that there are 10 enemies per line
+    var increment = (window.innerWidth - 200) / 10;
+    //set starting position of the queue
+    var left = 100;
+    var top = 100;
+    var movingRight = true;
+    //loop through all of the enemies and assign them to the starting position
+    for (var i = 0; i < window.enemies.length; i ++) {
+      window.enemies[i].left = left;
+      window.enemies[i].top = top;
+      window.enemies[i].movingRight = movingRight;
+      //increment/decrement the starting position based on the direction of the enemy
+      movingRight ? left += increment : left -= increment;
+      //if the enemy is at an edge, change the queue direction and start the next row down
+      if(left >= (window.innerWidth - 100)|| left <= 100) {
+        movingRight = !movingRight;
+        top += 50;
+      }
+    }
+  });
 
 
 });
