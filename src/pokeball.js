@@ -21,11 +21,11 @@ Pokeball.prototype.step = function(){
       this.top -= 10;
     }
     this.setPosition(this.top, this.left);
-    if (this.top < 0 || this.top > window.innerHeight - 35){
+    if (this.top < 0 || this.top > window.innerHeight - 35){  //remove pokeball when it leaves the screen
       this.$node.remove();
       window.pokeballs.shift();
       this.used = true;
-      if (window.enemies.length === 0){
+      if (window.enemies.length === 0){     //win message at the end of the round
         alert('Congratulations, you have used '+window.pokeballsused + ' pokeballs to capture 50 enemies! ' + Math.round((50/window.pokeballsused)*100) + ' points for you!');
       }
     }
@@ -34,7 +34,7 @@ Pokeball.prototype.step = function(){
     for (var j=0; j<window.enemies.length; j++){
       var enemyleft = window.enemies[j].left;
       var enemytop = window.enemies[j].top;
-      if (Math.abs(pokeleft-enemyleft) < 35 && Math.abs(poketop-enemytop) < 35){
+      if (Math.abs(pokeleft-enemyleft) < 35 && Math.abs(poketop-enemytop) < 35){  //check for collision between enemies and instance of pokeball
         // this.$node.remove();              //remove the pokeball node from the array and DOM
         // window.pokeballs.shift();
         window.enemies[j].$node.remove(); //remove the enemy node from the array and DOM

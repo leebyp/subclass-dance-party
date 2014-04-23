@@ -54,7 +54,7 @@ $(document).ready(function(){
 
     var dancer = new DancerMakerFunction(
       $("body").height() - 150,
-      ($("body").width() - 300) * Math.random() + 100,
+      ($("body").width() - 300) * Math.random() + 100,    //ensure not off screen
       100
     );
     $('body').append(dancer.$node);
@@ -82,17 +82,17 @@ $(document).ready(function(){
   });
 
   $("body").on("mouseover", ".pikachu", function(){
-    $(".addPokeballButton").trigger("click");
+    $(".addPokeballButton").trigger("click");     //triggers pokeball on mouseover
   });
 
   $(window).on("keydown", function(event){
     if (event.keyCode === 32) {
-      $(".addPokeballButton").trigger("click");
+      $(".addPokeballButton").trigger("click");   //triggers pokeball with spacebar
     }
   });
 
   //line up enemies at top of screen
-  $(".lineup").click(function(event){
+  $(".lineUp").click(function(event){
     //set constant gap based on window width so that there are 10 enemies per line
     var increment = (window.innerWidth - 200) / 10;
     //set starting position of the queue
