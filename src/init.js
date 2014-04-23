@@ -54,7 +54,7 @@ $(document).ready(function(){
 
     var dancer = new DancerMakerFunction(
       $("body").height() - 150,
-      ($("body").width() - 200) * Math.random() + 100,
+      ($("body").width() - 300) * Math.random() + 100,
       100
     );
     $('body').append(dancer.$node);
