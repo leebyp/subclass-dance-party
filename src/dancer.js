@@ -1,5 +1,4 @@
 var Dancer = function(top, left, timeBetweenSteps){
-  console.log(this); //remove later
   this.$node = $('<span class="dancer"></span>');
   this._timeBetweenSteps =  timeBetweenSteps;
   this.step();

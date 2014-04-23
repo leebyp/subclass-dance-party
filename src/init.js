@@ -2,6 +2,7 @@ $(document).ready(function(){
   window.pikachu = [];
   window.pokeballs = [];
   window.enemies = [];
+  window.pokeballsused = 0;
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -60,7 +61,7 @@ $(document).ready(function(){
     window.pikachu.push(dancer);
     this.remove();
 
-    for (var i=0; i<100; i++){
+    for (var i=0; i<50; i++){
       $('.addInvaderButton').trigger('click');
     }
 
@@ -69,13 +70,12 @@ $(document).ready(function(){
   //fire pokeball at enemies, by clicking button/mouseover/spacebar
   $(".addPokeballButton").click(function(event){
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
-    console.log(dancerMakerFunctionName);
     var DancerMakerFunction = window[dancerMakerFunctionName];
 
     var dancer = new DancerMakerFunction(
       $("body").height() - 200,
       window.pikachu[0].left + (96 / 2) - (35 / 2), //should be equal to pikachus current .left
-      2
+      10
     );
     $('body').append(dancer.$node);
     window.pokeballs.push(dancer);

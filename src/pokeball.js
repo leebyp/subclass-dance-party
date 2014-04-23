@@ -5,6 +5,7 @@ var Pokeball = function(top, left, timeBetweenSteps){
   this.setClass('pokeball');
   this.used = false;
   this.hit = false;
+  window.pokeballsused++;
 };
 
 Pokeball.prototype = Object.create(Dancer.prototype);
@@ -24,6 +25,9 @@ Pokeball.prototype.step = function(){
       this.$node.remove();
       window.pokeballs.shift();
       this.used = true;
+      if (window.enemies.length === 0){
+        alert('Congratulations, you have used '+window.pokeballsused + ' pokeballs to capture 50 enemies! ' + Math.round((50/window.pokeballsused)*100) + ' points for you!');
+      }
     }
     var pokeleft = this.left;
     var poketop = this.top;
